@@ -9,6 +9,7 @@ namespace Infrastructure.Extensions
         public static IServiceCollection AddCoreServices(this IServiceCollection services)
         {
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             return services;
         }
     }
