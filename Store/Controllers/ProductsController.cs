@@ -1,5 +1,6 @@
 ﻿using API.Dto;
 using API.Errors;
+using API.Helpers;
 using AutoMapper;
 using Core.Interfaces;
 using Core.Models;
@@ -17,7 +18,7 @@ namespace API.Controllers
         private readonly IGenericRepository<ProductType> _typesRepo;
         private readonly IMapper _mapper;
 
-        public ProductsController(IGenericRepository<Product> productsRepo, IGenericRepository<ProductBrand> brandsRepo, 
+        public ProductsController(IGenericRepository<Product> productsRepo, IGenericRepository<ProductBrand> brandsRepo,
             IGenericRepository<ProductType> typesRepo, IMapper mapper)
         {
             _productsRepo = productsRepo;
@@ -27,13 +28,16 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Product>>> GetProductsAsync()
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProductsAsync([FromQuery] ProductSpecParams productParams)
         {
-            var spec = new ProductWithTypesAndBrandSpecification();
+            var spec = new ProductWithTypesAndBrandSpecification(productParams);
+            var countSpec = new ProductWithFiltersForCountSpecification(productParams);
+            var totalItems = await _productsRepo.CountAsync(countSpec);
             var products = await _productsRepo.GetListAsync(spec);
-            var productToReturnDto = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
 
-            return Ok(productToReturnDto);
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
+
+            return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]
@@ -56,7 +60,6 @@ namespace API.Controllers
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrandsAsync() 
         {
-            var spec = new ProductWithTypesAndBrandSpecification();
             var brands = await _brandsRepo.GetListAllAsync();
             return Ok(brands);
         }
