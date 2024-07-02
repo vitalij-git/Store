@@ -22,8 +22,20 @@ namespace API.Controllers
         [HttpGet("servererror")]
         public ActionResult GetServerError()
         {
-            
-            return Ok();
+
+            try
+            {
+                throw new System.Exception("This is a simulated server error.");
+            }
+            catch (System.Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    status = "error",
+                    message = "An unexpected error occurred.",
+                    details = ex.Message
+                });
+            }
         }
 
         [HttpGet("badrequest")]
