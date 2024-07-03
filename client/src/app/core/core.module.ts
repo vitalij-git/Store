@@ -7,7 +7,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { ToastrModule } from 'ngx-toastr';
 import { SectionHeaderComponent } from './section-header/section-header.component';
-
+import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -26,11 +27,15 @@ import { SectionHeaderComponent } from './section-header/section-header.componen
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right",
       preventDuplicates: true
-    })
+    }),
+    BreadcrumbComponent,
+    BreadcrumbItemDirective,
+    NgxSpinnerModule
   ],
   exports: [
     NavBarComponent,
-    SectionHeaderComponent
+    SectionHeaderComponent,
+    NgxSpinnerModule
   ]
 })
 export class CoreModule { }
