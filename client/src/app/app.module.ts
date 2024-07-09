@@ -10,18 +10,22 @@ import { HomeModule } from './home/home.module';
 import { ContactModule } from './contact/contact.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({ declarations: [
         AppComponent,
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    bootstrap: [AppComponent], imports: 
+    [BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         CoreModule,
         HomeModule,
+        ModalModule.forRoot(),
         ContactModule], providers: [
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
+        
     ] })
 export class AppModule { }

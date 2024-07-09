@@ -1,6 +1,9 @@
 ﻿using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Data.Docker;
+using Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 namespace Infrastructure.Extensions
 {
@@ -10,6 +13,9 @@ namespace Infrastructure.Extensions
         {
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IBasketRepository, BasketDockerRepository>();
+            services.AddScoped<ITokenService, TokenService>();
+        
             return services;
         }
     }

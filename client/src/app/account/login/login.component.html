@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h5 class="modal-title">Sign In</h5>
+  <button type="button" class="close custom-close-button" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title text-center mb-4">Sign In</h5>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+       
+        <app-text-input [formControl]="loginForm.controls['email']"  [label]="'Email Address'"></app-text-input>
+        <app-text-input [formControl]="loginForm.controls['password']" [type]="'password'" [label]="'Password'"></app-text-input> 
+
+        <div class="text-center buttons-container">
+          <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary btn-block">Sign In</button>
+          <button type="button" class="btn btn-secondary btn-block" (click)="openSignUpModal()">Sign Up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

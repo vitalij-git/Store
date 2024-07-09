@@ -1,0 +1,86 @@
+<div class="container mt-5">
+   <ng-container *ngIf="(this.basketService.basketSource$ | async) as basket; else emptyBasket">
+    <div class="container">
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="bg-light text-uppercase">
+              <tr>
+                <th>
+                  <div class="py-2">Product</div>
+                </th>
+                <th>
+                  <div class="py-2">Price</div>
+                </th>
+                <th>
+                  <div class="py-2">Quantity</div>
+                </th>
+                <th>
+                  <div class="py-2">Total</div>
+                </th>
+                <th>
+                  <div class="py-2">Remove</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of this.basket.basketItems">
+                  <th>
+                    <div class="p-2 d-inline-block">
+                        <img src="{{item.pictureUrl}}" alt="{{item.productName}}" class="img-fluid item-img">
+                        <div class="ms-3 d-inline-block align-middle">
+                          <h5 class="mb-0">
+                            <a routerLink="/shop/{{item.id}}" class="item-name-link">{{item.productName}}</a>
+                          </h5>
+                          <span class="text-muted fst-italic">
+                            Type {{item.type}}
+                          </span>
+                        </div>
+                    </div>
+                  </th>
+                  <td class="align-middle">
+                    <strong >
+                      {{item.price | currency}}
+                    </strong>
+                  </td>
+                  <td class="align-middle">
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-minus-circle text-warning me-2 plius-minus-icon" (click)="removeItem(item.id,1)"></i>
+                        <strong class="product-count-number">{{item.quantity}}</strong>
+                        <i class="fa fa-plus-circle text-warning mx-2 plius-minus-icon" (click)="incrementQuantity(item)"></i>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                        <strong>{{item.price * item.quantity | currency}}</strong>
+                  </td>
+                  <td class="align-middle">
+                    <a class="text-danger">
+                        <i class="fa fa-trash remove-btn"
+                                  (click)="removeItem(item.id, item.quantity)"   
+                        ></i>
+                    </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-6 offset-6">
+            <app-order-totals></app-order-totals>
+            <div class="d-grid">
+              <a routerLink="/checkout" class="btn btn-outline-primary py-2">
+                  Proceed to checkout
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container> 
+  <ng-template #emptyBasket>
+    <div>
+      <p>There are no items is your basket</p>
+  </div>
+  </ng-template>
+ 
+</div>

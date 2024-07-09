@@ -20,7 +20,11 @@ namespace Infrastructure.Data.Config
             builder.Property(p => p.PictureUrl).IsRequired();
             builder.HasOne(p => p.ProductBrand).WithMany().HasForeignKey(p => p.ProductBrandId);
             builder.HasOne(p => p.ProductType).WithMany().HasForeignKey(p => p.ProductTypeId);
-             
+
         }
+        //public void ConfigureBasket(EntityTypeBuilder<CustomerBasket> builder)
+        //{
+            
+        //}
     }
 }

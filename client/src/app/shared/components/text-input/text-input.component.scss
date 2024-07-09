@@ -1,0 +1,14 @@
+.loader{
+    position: absolute;
+    width: auto;
+    top: 20px;
+    right: 40px;
+    margin-top: 0;
+}
+.invalid-color-danger{
+    color: red !important;
+}
+.form-control.is-invalid{
+    border-color: red !important;
+
+}

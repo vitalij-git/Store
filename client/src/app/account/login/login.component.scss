@@ -1,0 +1,52 @@
+.modal-content {
+    border-radius: 10px;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  
+  .custom-close-button {
+    margin-left: auto;
+    color: gray;
+    font-size: 2rem;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    padding-bottom: 5px;
+  }
+  
+  .custom-close-button:hover {
+    color: white;
+    background-color: red;
+   
+  }
+  .buttons-container{
+    display: flex;
+    justify-content: space-around;
+  }
+  

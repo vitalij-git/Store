@@ -1,0 +1,23 @@
+.item-img{
+    max-height: 50px;
+}
+.plius-minus-icon{
+    cursor: pointer;
+    font-size: 2rem;
+}
+.product-count-number{
+    font-size: 1.5rem;
+}
+.remove-btn{
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.item-name-link{
+    text-decoration: none;
+    color: #212529;
+}
+.item-name-link:hover{
+    text-decoration: underline;
+    color: red;
+}
